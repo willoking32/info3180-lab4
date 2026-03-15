@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block main %}
+<ul>
+    {% for item in pics %}
+    <li>
+        <img class ="images" src = "{{ url_for('get_image', filename= item  ) }}" alt = "Try again another time"/>
+    </li>
+    
+    {% endfor %}
+</ul>
+
+{% endblock%}
+
+'./uploads/{{item}}'

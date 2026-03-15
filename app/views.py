@@ -1,6 +1,6 @@
 import os
 from app import app, db, login_manager
-from flask import render_template, request, redirect, url_for, flash, session, abort
+from flask import render_template, request, redirect, url_for, flash, session, abort, send_from_directory
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.utils import secure_filename
 from app.models import UserProfile
@@ -25,6 +25,26 @@ def home():
 def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
+
+#added uploads route and function
+@app.route('/uploads/<filename>')
+def get_image(filename):
+    print("file name = ",filename)
+    return send_from_directory(os.path.join(os.getcwd(),
+                                     app.config['UPLOAD_FOLDER']), filename)
+
+#added files route and function
+@app.route('/files')
+@login_required
+def files():
+    files = get_uploaded_images()
+    pics = []
+    #for file in files:
+        #pic = send_from_directory(os.path.join(os.getcwd(),
+        #                             app.config['UPLOAD_FOLDER']), file)
+        #pics.append(pics)
+        #print (files)
+    return render_template('files.html',pics=files[1:] )
 
 #added login required decorator
 @app.route('/upload', methods=['POST', 'GET'])
@@ -114,3 +134,15 @@ def add_header(response):
 def page_not_found(error):
     """Custom 404 page."""
     return render_template('404.html'), 404
+
+#created
+def get_uploaded_images():
+    rootdir = os.getcwd()
+    allfiles = []
+    #print (rootdir)
+    for subdir, dirs, files in os.walk(rootdir + '/uploads/'):
+        for file in files:
+            allfiles.append(file)
+            #print (os.path.join(subdir, file))
+            #print(file)
+    return allfiles
