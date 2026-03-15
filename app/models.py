@@ -19,8 +19,7 @@ class UserProfile(db.Model):
     password = db.Column(db.String(128))
 
     #added __init__():
-    def __init__(self, id, first_name, last_name, username, password):
-        self.id = id
+    def __init__(self, first_name, last_name, username, password):
         self.first_name = first_name
         self.last_name = last_name
         self.username = username
