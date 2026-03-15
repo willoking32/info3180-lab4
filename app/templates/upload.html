@@ -8,9 +8,9 @@
 {# Add the appropriate method and enctype attributes to the form tag to allow for file uploads #}
 <form action="{{ url_for('upload') }}" method = 'post' enctype="multipart/form-data">
   {{ form.csrf_token }}
-  <div>
+  <div class="uploadf">
     {{form.pic.label()}}
-    {{form.pic(class='form-control')}}
+    {{form.pic(class='')}}
   </div>
   
   {# Add the file upload field as you learnt for Flask-WTF #}

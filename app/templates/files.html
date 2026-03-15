@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block main %}
-<ul>
+<ul class = "image_box">
     {% for item in pics %}
     <li>
         <img class ="images" src = "{{ url_for('get_image', filename= item  ) }}" alt = "Try again another time"/>

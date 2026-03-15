@@ -18,3 +18,26 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+.uploadf{
+    display: flex;
+    flex-direction: column;
+    align-self: self-start;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+
+}
+
+.image_box{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    align-self: center;
+    border: 5rem;
+    list-style-type: none;
+}
+
+.images{
+    padding: 5%;
+    height: 25rem;
+    width: 25rem;
+}

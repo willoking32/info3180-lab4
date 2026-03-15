@@ -46,6 +46,14 @@ def files():
         #print (files)
     return render_template('files.html',pics=files[1:] )
 
+#added logout route and function
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("you have been logged out","success")
+    return redirect(url_for('home'))
+
 #added login required decorator
 @app.route('/upload', methods=['POST', 'GET'])
 @login_required
@@ -61,7 +69,7 @@ def upload():
         filename = secure_filename(photo.filename)
         photo.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
         flash('File Saved', 'success')
-        return redirect(url_for('home')) # Update this to redirect the user to a route that displays all uploaded image files
+        return redirect(url_for('files')) # Update this to redirect the user to a route that displays all uploaded image files
 
     return render_template('upload.html',form=photoform)
 
